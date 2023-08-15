@@ -1,0 +1,192 @@
+openapi: 3.0.0
+info:
+  title: Cart API
+  version: 1.0.0
+  description: API for managing shopping carts
+servers:
+  - url: http://localhost:3032
+  # - url: http://studentdocker.informatika.uni-mb.si:7006
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+        user_id:
+          type: string
+        products_id:
+          type: array
+          items:
+            type: string
+paths:
+  /carts:
+    post:
+      security:
+        - BearerAuth: []
+      summary: Create a new cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                products_id:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Created
+        '500':
+          description: Failed to create cart
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get all carts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+        '500':
+          description: Failed to retrieve carts
+    delete:
+      security:
+        - BearerAuth: []
+      summary: Delete all carts
+      responses:
+        '200':
+          description: All carts deleted successfully
+        '500':
+          description: Failed to delete carts
+  /carts/user/{user_id}:
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get cart by user ID
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Cart not found
+        '500':
+          description: Failed to retrieve cart
+  /carts/product/{productId}:
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get cart by product ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Cart not found
+        '500':
+          description: Failed to retrieve cart
+  /carts/{id}:
+    get:
+      security:
+        - BearerAuth: []
+      summary: Get a single cart by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Cart not found
+        '500':
+          description: Failed to retrieve cart
+    put:
+      security:
+        - BearerAuth: []
+      summary: Update a cart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: string
+                products_id:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '404':
+          description: Cart not found
+        '500':
+          description: Failed to update cart
+    delete:
+      security:
+        - BearerAuth: []
+      summary: Delete a cart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cart deleted successfully
+        '404':
+          description: Cart not found
+        '500':
+          description: Failed to delete cart
+
