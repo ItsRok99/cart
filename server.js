@@ -594,9 +594,12 @@ app.get("/carts/product/:productId", jwtAuth, (req, res) => {
         
         // Start the server
         const port = 3032; // Change to your desired port number
-        app.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
+        const host = '0.0.0.0';
+        app.listen(port, host, () => {
+            console.log(`Server is running on ${host}:${port}`);
         });
+
+
     })
     .catch((error) => {
         console.error("Error connecting to MongoDB:", error);
