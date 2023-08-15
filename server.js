@@ -109,7 +109,7 @@ app.post("/carts", jwtAuth, (req, res) => {
     axios.defaults.headers.common['authorization'] = bearer;
 
     // Check if user exists
-    axios.get(`http://127.0.0.1:8000/users/${user_id}`,)
+    axios.get(`https://user-xojp.onrender.com/users/${user_id}`,)
         .then((userResponse) => {
             const user = userResponse.data;
 
@@ -120,7 +120,7 @@ app.post("/carts", jwtAuth, (req, res) => {
             }
 
             // Check if product exists
-            axios.get(`http://127.0.0.1:3000/products/${products_id}`)
+            axios.get(`https://product-045e.onrender.com/products/${products_id}`)
                 .then((productResponse) => {
                     const product = productResponse.data;
 
@@ -281,7 +281,7 @@ app.put("/carts/:id", jwtAuth, (req, res) => {
     axios.defaults.headers.common['authorization'] = bearer;
 
     // Check if user exists
-    axios.get(`http://127.0.0.1:8000/users/${user_id}`)
+    axios.get(`https://user-xojp.onrender.com/users/${user_id}`)
         .then((userResponse) => {
             const user = userResponse.data;
 
@@ -330,7 +330,7 @@ app.put("/carts/:id", jwtAuth, (req, res) => {
                         });
             }
             else {
-                axios.get(`http://127.0.0.1:3000/products/${products_id[products_id.length - 1]}`)
+                axios.get(`https://product-045e.onrender.com/products/${products_id[products_id.length - 1]}`)
                 .then((productResponse) => {
                     const product = productResponse.data;
 
@@ -503,7 +503,7 @@ app.get("/carts/product/:productId", jwtAuth, (req, res) => {
     // console.log("bearer: " , bearer);
 
     // Fetch product data from the product service
-    axios.get(`http://127.0.0.1:3000/products/${productId}`)
+    axios.get(`https://product-045e.onrender.com/products/${productId}`)
         .then((response) => {
             const product = response.data;
 
