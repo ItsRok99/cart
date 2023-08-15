@@ -4,7 +4,8 @@ info:
   version: 1.0.0
   description: API for managing shopping carts
 servers:
-  - url: http://localhost:3032
+  - url: https://cart-5tg9.onrender.com
+  #- url: http://localhost:3032
   # - url: http://studentdocker.informatika.uni-mb.si:7006
 components:
   securitySchemes:
