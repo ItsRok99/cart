@@ -181,7 +181,7 @@ app.get("/carts/user/:user_id", jwtAuth, (req, res) => {
     axios.defaults.headers.common['authorization'] = bearer;
 
     // Fetch user data from the user service
-    axios.get(`http://127.0.0.1:8000/users/${user_id}`)
+    axios.get(`https://user-xojp.onrender.com/users/${user_id}`)
         .then((response) => {
             const user = response.data;
 
